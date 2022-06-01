@@ -53,5 +53,21 @@ def handler(event, context):
     raw_tweets['datetime'] = raw_tweets['datetime'].apply(lambda x: datetime.fromisoformat(str(x)).replace(tzinfo=None))
     
     # clean tweets with regex
-    raw_tweets['text'] = raw_tweets['text'].apply(lambda tweet: clean(tweet))   
+    raw_tweets['text'] = raw_tweets['text'].apply(lambda tweet: clean(tweet))
+    
+    # attache sentiments of tweets
+    tweets_with_sentiments = tweet_sentiment(raw_tweets)
+    
+    wr.s3.to_parquet(
+        df=tweets_with_sentiments,
+        path=clean_tweets_bucket,
+        dataset=True,
+        partition_cols=['datetime'],
+        database='tweets_db',   #   Athena/Glue database
+        table='tweets_table1'   #   Athena/Glue table
+    )
+    print("FINISHED WRITING")
+    del tweets_with_sentiments
+    gc.collect()
+    return
      
