@@ -26,3 +26,7 @@ api = tw.API(auth)
 
 tesla_df = pd.DataFrame(columns=['datetime', 'id', 'username', 'followers_count', 'verified_status',
                                  'text', 'retweets', 'tweet_url', 'location'])
+
+print(tesla_df)
+tweets_list = []
+st = time.time()
