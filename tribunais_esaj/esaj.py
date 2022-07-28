@@ -2,7 +2,7 @@
 
 from drivers.firefox.driver_firefox import WebDriver
 
-webdriver = WebDriver(False)
+webdriver = WebDriver()
 
 url = 'https://esaj.tjsc.jus.br/cpopg/open.do'
 webdriver.driver.get(url)
