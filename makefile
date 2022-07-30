@@ -1,3 +1,5 @@
 
-ini:
-		export PYTHONPATH="${PYTHONPATH}:$(shell pwd)"
+export PYTHONPATH=$(PWD)
+
+ini:		
+		echo $(PYTHONPATH)
